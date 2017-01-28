@@ -66,4 +66,4 @@ let
       license = stdenv.lib.licenses.publicDomain;
     };
 
-in common.haskellPackages.callPackage package {}
+in pkgs.haskell.lib.dontCheck (common.haskellPackages.callPackage package {})
