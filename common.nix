@@ -1,6 +1,6 @@
-{ haskell }:
+{ haskell, ... }@args:
 {
-  haskellPackages = haskell.packages.ghc802.override {
+  haskellPackages = args.haskellPackages.override {
     overrides = self: super: {
       distributed-process-client-server = haskell.lib.dontCheck (haskell.lib.doJailbreak super.distributed-process-client-server);
       distributed-process-extras = haskell.lib.doJailbreak super.distributed-process-extras;

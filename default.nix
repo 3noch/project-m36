@@ -1,6 +1,9 @@
-{ pkgs, devMode ? false }:
+{ pkgs
+, haskellPackages ? pkgs.haskellPackages
+, devMode ? false
+}:
 let
-  common = pkgs.callPackage ./common.nix {};
+  common = pkgs.callPackage ./common.nix { inherit haskellPackages; };
 
   package =
     { mkDerivation, aeson, attoparsec, base, base64-bytestring, binary
@@ -66,4 +69,4 @@ let
       license = stdenv.lib.licenses.publicDomain;
     };
 
-in pkgs.haskell.lib.dontCheck (common.haskellPackages.callPackage package {})
+in pkgs.haskell.lib.dontHaddock (pkgs.haskell.lib.dontCheck (common.haskellPackages.callPackage package {}))
